@@ -12,7 +12,8 @@ login () {
 }
 
 download () {
-  pivnet download-product-files --accept-eula --product-slug $PRODUCT_SLUG --release-version "${RELEASE_VERSION}" --glob=* --download-dir=./iso
+  pivnet download-product-files --accept-eula --product-slug $PRODUCT_SLUG \
+  --release-version "${RELEASE_VERSION}" --glob=* --download-dir=./iso
 }
 
 # login to the pivotal network
