@@ -1,0 +1,59 @@
+#!/bin/bash
+
+set -eu
+
+# Please note CF Dev only supports macOS at this time
+# https://github.com/cloudfoundry-incubator/cfdev#prerequisites
+
+export        CF_CLI_PATH=$(which cf)
+export    PIVNET_CLI_PATH=$(which pivnet)
+export     CF_CLI_VERSION=$(brew info --json=v1 cloudfoundry/tap/cf-cli \
+                            | jq -r .[]."versions"."stable")
+export PIVNET_CLI_VERSION=$(brew info --json=v1 pivotal/tap/pivnet-cli \
+                            | jq -r .[]."versions"."stable")
+
+### - Cloud Foundry CLI
+
+echo "Checking for Cloud Foundry CLI..."
+
+if [[ ! -x ${CF_CLI_PATH} ]]; then
+    echo "Doesn't exist!  Installing..."
+    brew install cloudfoundry/tap/cf-cli
+else
+    if [[ ${CF_CLI_VERSION} == 6.40.0 ]]; then
+      echo "You've got the latest Cloud Foundry CLI version, skipping..."
+    else
+      echo "Exists!  Updating..."
+      brew upgrade cloudfoundry/tap/cf-cli
+    fi
+fi
+
+### - Pivnet CLI
+
+echo "Checking for Pivnet CLI..."
+
+if [[ ! -x ${PIVNET_CLI_PATH} ]]; then
+    echo "Doesn't exist!  Installing..."
+    brew install pivotal/tap/pivnet-cli
+else
+  if [[ ${PIVNET_CLI_VERSION} == 0.0.55 ]]; then
+    echo "You've got the latest Pivnet CLI version, skipping..."
+  else
+    echo "Exists!  Updating..."
+    brew upgrade pivotal/tap/pivnet-cli
+  fi
+fi
+
+### - CF DEV plugin
+
+# https://github.com/cloudfoundry-incubator/cfdev/issues/53
+# version 0.0.11 not compatible with latest PCF Dev, using 0.0.10
+
+install_cf_dev () {
+  cf install-plugin \
+    http://d3p1cc0zb2wjno.cloudfront.net/cfdev/cfdev-v0.0.10-darwin "cfdev" -f
+}
+
+echo "Installing cfdev plugin..."
+
+install_cf_dev
