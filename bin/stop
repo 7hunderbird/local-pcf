@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+
+export ISO_FILE=./iso/pcfdev-pas.v.2.0.20.0-build.0.82.0.iso
+
+stop () {
+    cf dev stop
+}
+
+stop
