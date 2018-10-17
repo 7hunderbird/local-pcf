@@ -14,3 +14,10 @@ stop:
 
 setup: install download start
 
+reset:
+	rm -rf ~/.cf ~/.cfdev
+	bin/install
+
+clean: stop reset
+	
+
