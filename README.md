@@ -1,9 +1,13 @@
-# pcfdev-mortar
+# pcfdev-duct-tape
+
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+ ![PCF Dev Duct Tape](images/pcf-duct-tape.png "PCF Dev Duct Tape)
 
 Once you clone the repo you can run `make` commands below to use the scripts.
 
 ```
-git clone https://github.com/7hunderbird/pcfdev-mortar.git
+git clone https://github.com/7hunderbird/pcfdev-duct-tape.git
 ```
 
 ## Download
