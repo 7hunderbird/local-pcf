@@ -1,6 +1,6 @@
 # pcfdev-duct-tape
 
-![PCF Dev Duct Tape](/images/pcfdev-duct-tape.png "PCF Dev Duct Tape)
+![PCF Dev Duct Tape](images/pcfdev-duct-tape.png "PCF Dev Duct Tape)
 
 Once you clone the repo you can run `make` commands below to use the scripts.
 
