@@ -2,7 +2,7 @@
 
 ![PCF Dev Duct Tape](images/pcfdev-duct-tape.png "PCF Dev Duct Tape")
 
-Once you clone the repo you can run `make` commands below to use the scripts.
+A rapid way to stick `pcfdev` together.
 
 ## Quick Start
 
