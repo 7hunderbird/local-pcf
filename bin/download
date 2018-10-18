@@ -6,21 +6,6 @@ set -eu
 
 export PRODUCT=pcfdev
 
-# Set your authentication token from Pivotal Network
-
-set_token () {
-    if [[ ${UAA_API_TOKEN:-unset} == "unset" ]]; then
-        echo "Please set your UAA API Token by running 'export UAA_API_TOKEN=<value>'"
-        return 1
-    else
-        export UAA_API_TOKEN=$UAA_API_TOKEN
-    fi
-}
-
-login () {
-    pivnet login --api-token=${UAA_API_TOKEN}
-}
-
 download () {
     pivnet download-product-files --accept-eula --product-slug $PRODUCT_SLUG \
     --release-version "${RELEASE_VERSION}" --glob=* --download-dir=./iso

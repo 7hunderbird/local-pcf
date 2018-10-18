@@ -5,7 +5,7 @@ set -eu
 export ISO_FILE=./iso/pcfdev-pas.v.2.0.20.0-build.0.82.0.iso
 
 start () {
-    cf dev start -f ${ISO_FILE} -m 10
+    cf dev start -f ${ISO_FILE}
 }
 
 start

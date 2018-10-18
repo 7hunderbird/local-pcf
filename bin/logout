@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -eu
+
+logout () {
+    pivnet logout
+}
