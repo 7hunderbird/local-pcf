@@ -1,9 +1,9 @@
-# local-pcf
+# pcfdev-mortar
 
 Once you clone the repo you can run `make` commands below to use the scripts.
 
 ```
-git clone https://github.com/7hunderbird/local-pcf.git
+git clone https://github.com/7hunderbird/pcfdev-mortar.git
 ```
 
 ## Download
