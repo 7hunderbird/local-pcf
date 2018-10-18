@@ -1,8 +1,6 @@
 # pcfdev-duct-tape
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
- ![PCF Dev Duct Tape](images/pcf-duct-tape.png "PCF Dev Duct Tape)
+![PCF Dev Duct Tape](images/pcfdev-duct-tape.png "PCF Dev Duct Tape")
 
 Once you clone the repo you can run `make` commands below to use the scripts.
 
