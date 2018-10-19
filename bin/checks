@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -eux
+
+# pre-flight checks
+# export to environment variables to pass to subsequent scripts
+
+export         PRODUCT=pcfdev
+
+export    PRODUCT_SLUG=$(pivnet --format=json product -p ${PRODUCT} \
+                               | jq -r .slug)
+export RELEASE_VERSION=$(pivnet --format=json releases -p ${PRODUCT} \
+                               | jq -r .[0].version)
+export      RELEASE_ID=$(pivnet --format=json releases -p ${PRODUCT} \
+                               | jq -r .[0].id)
+export     RELEASE_SHA=$(pivnet curl \
+               /products/${PRODUCT_SLUG}/releases/${RELEASE_ID}/product_files \
+                               | jq -r .product_files[1].sha256)
+
+select_iso_file () {
+    export ISO_FILE=$(ls -ASrt ./iso | tail -n 1)
+}
+
+select_iso_file
+
+check_shasum () {
+    local_sha=$(pv ./iso/${ISO_FILE} | shasum -a 256)
+}
+
+check_shasum

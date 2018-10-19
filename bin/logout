@@ -2,6 +2,10 @@
 
 set -eu
 
+# logout of pivnet-cli
+
 logout () {
     pivnet logout
 }
+
+logout

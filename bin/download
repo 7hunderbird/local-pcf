@@ -2,25 +2,19 @@
 
 set -eu
 
-# This is all for the pcfdev product
+# bin/checks, when it passes will pass variabes to download
+#
+# PRODUCT_SLUG
+# RELEASE_VERSION
+# CHECKS
 
-export PRODUCT=pcfdev
-
-download () {
-    pivnet download-product-files --accept-eula --product-slug $PRODUCT_SLUG \
-    --release-version "${RELEASE_VERSION}" --glob=* --download-dir=./iso
-}
-
-# login to the pivotal network
-
-set_token
-login
-
-export    PRODUCT_SLUG=$(pivnet --format=json product -p ${PRODUCT} \
-                                | jq -r .slug)
-export RELEASE_VERSION=$(pivnet --format=json releases -p ${PRODUCT} \
-                                | jq -r .[0].version)
+source bin/checks
 
 # download the image from pivotal network
+
+download () {
+    pivnet download-product-files --accept-eula --product-slug ${PRODUCT_SLUG} \
+    --release-version "${RELEASE_VERSION}" --glob=* --download-dir=./iso
+}
 
 download
