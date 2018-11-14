@@ -48,7 +48,7 @@ Then we've created conveniece wrappers to start and stop `pcfdev` for you, and s
 make start/stop
 ```
 
-## Troubleshooing
+## Troubleshooting
 
 Clean will stop `pcfdev` and remove all state and files.
 

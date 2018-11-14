@@ -17,8 +17,14 @@ export     RELEASE_SHA=$(pivnet curl \
                /products/${PRODUCT_SLUG}/releases/${RELEASE_ID}/product_files \
                                | jq -r .product_files[1].sha256)
 
+ # (-A) List all entries except for . and ..
+ # (-S) Sort files by size
+ # (-r) oldest entries first
+ # (-t) most recently modified first
+ # (tail -n 1) limit to top result
+
 select_iso_file () {
-    export ISO_FILE=$(ls -ASrt ./iso | tail -n 1)
+    ISO_FILE=$(ls -ASrt ./iso | tail -n 1)
 }
 
 select_iso_file

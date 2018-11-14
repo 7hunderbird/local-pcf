@@ -2,32 +2,39 @@
 
 set -eu
 
-# Please note cfdev only supports macOS at this time
+# At this time, cfdev only supports macOS
 # https://github.com/cloudfoundry-incubator/cfdev#prerequisites
+#
+# Therefore we use homebrew package manager only.
 
 ### - Homebrew packages
 
-install_brew_packages () {
+# Homebrew will not break on installing if the current version is installed.
+# Yet it will break if there is a new version available.
+#
+# When we put two commands in order, the second command only runs when the first
+# fails.  W
+
+upgrade_or_install_brew_packages () {
     brew tap cloudfoundry/tap
     brew tap pivotal/tap
-    brew install cloudfoundry/tap/cf-cli
-    brew install pivotal/tap/pivnet-cli
-    brew install pv
+    brew upgrade cloudfoundry/tap/cf-cli || brew install cloudfoundry/tap/cf-cli
+    brew upgrade pivotal/tap/pivnet-cli || brew install pivotal/tap/pivnet-cli
+    brew upgrade pv || brew install pv
 }
 
 ### - CF DEV plugin
 
-# https://github.com/cloudfoundry-incubator/cfdev/issues/53
-# version 0.0.11 not compatible with latest pcfdev, using 0.0.10
+# Install the cf dev plugin.
+# https://github.com/cloudfoundry-incubator/cfdev
 
 install_cf_dev () {
-    cf install-plugin \
-      http://d3p1cc0zb2wjno.cloudfront.net/cfdev/cfdev-v0.0.10-darwin "cfdev" -f
+    cf install-plugin "cfdev" -f
 }
 
 echo "Installing brew packages..."
 
-install_brew_packages
+upgrade_or_install_brew_packages
 
 echo "Installing cfdev plugin..."
 

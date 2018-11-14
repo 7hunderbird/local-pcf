@@ -2,10 +2,16 @@
 
 set -eu
 
-export ISO_FILE=./iso/pcfdev-pas.v.2.0.20.0-build.0.82.0.iso
+# (-A) List all entries except for . and ..
+# (-S) Sort files by size
+# (-r) oldest entries first
+# (-t) most recently modified first
+# (tail -n 1) limit to top result
+
+ISO_FILE=$(ls -ASrt ./iso | tail -n 1)
 
 start () {
-    cf dev start -f ${ISO_FILE}
+    cf dev start -f ./iso/${ISO_FILE}
 }
 
 start
