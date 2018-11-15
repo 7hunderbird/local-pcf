@@ -22,7 +22,6 @@ setup: install login download start
 
 reset:
 	rm -rf ~/.cf ~/.cfdev
-	bin/install
 
 clean: stop reset
 
