@@ -16,8 +16,6 @@ set -eu
 # fails.  W
 
 upgrade_or_install_brew_packages () {
-    brew tap cloudfoundry/tap
-    brew tap pivotal/tap
     brew upgrade cloudfoundry/tap/cf-cli || brew install cloudfoundry/tap/cf-cli
     brew upgrade pivotal/tap/pivnet-cli || brew install pivotal/tap/pivnet-cli
     brew upgrade pv || brew install pv
