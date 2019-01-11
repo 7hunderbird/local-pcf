@@ -16,9 +16,9 @@ set -eu
 # fails.  W
 
 upgrade_or_install_brew_packages () {
-    brew upgrade cloudfoundry/tap/cf-cli || brew install cloudfoundry/tap/cf-cli
-    brew upgrade pivotal/tap/pivnet-cli || brew install pivotal/tap/pivnet-cli
-    brew upgrade pv || brew install pv
+    brew upgrade cloudfoundry/tap/cf-cli 2>/dev/null || brew install cloudfoundry/tap/cf-cli
+    brew upgrade pivotal/tap/pivnet-cli 2>/dev/null || brew install pivotal/tap/pivnet-cli
+    brew upgrade pv 2>/dev/null || brew install pv
 }
 
 ### - CF DEV plugin
