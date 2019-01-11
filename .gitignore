@@ -1,3 +1,2 @@
 # We'll download files to the "iso" folder, yet we don't want them in the repo.
-iso/*.iso
-iso/*.txt
+iso/*
