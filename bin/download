@@ -3,10 +3,12 @@
 set -eu
 
 # bin/checks, when it passes will pass variabes to download
+# because they are exported
 #
 # PRODUCT_SLUG
 # RELEASE_VERSION
-# CHECKS
+# RELEASE_ID
+# RELEASE_SHA
 
 source bin/checks
 
@@ -14,7 +16,7 @@ source bin/checks
 
 download () {
     pivnet download-product-files --accept-eula --product-slug ${PRODUCT_SLUG} \
-    --release-version "${RELEASE_VERSION}" --glob=* --download-dir=./iso
+    --release-version "${RELEASE_VERSION}" --product-file-id ${PRODUCT_FILE_ID} --download-dir=./iso
 }
 
 download

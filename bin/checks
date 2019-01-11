@@ -2,7 +2,6 @@
 
 set -eux
 
-# pre-flight checks
 # export to environment variables to pass to subsequent scripts
 
 export         PRODUCT=pcfdev
@@ -13,15 +12,18 @@ export RELEASE_VERSION=$(pivnet --format=json releases -p ${PRODUCT} \
                                | jq -r .[0].version)
 export      RELEASE_ID=$(pivnet --format=json releases -p ${PRODUCT} \
                                | jq -r .[0].id)
-export     RELEASE_SHA=$(pivnet curl \
-               /products/${PRODUCT_SLUG}/releases/${RELEASE_ID}/product_files \
-                               | jq -r .product_files[1].sha256)
+export PRODUCT_FILE_ID=$(pivnet product-files --format=json \
+    --product-slug=$PRODUCT_SLUG --release-version="${RELEASE_VERSION}" \
+    | jq -r '.[] | select (.name | contains("osx")) | .id')
+export     RELEASE_SHA=$(pivnet product-files --format=json \
+    --product-slug=$PRODUCT_SLUG --release-version="${RELEASE_VERSION}" \
+    | jq -r '.[] | select (.name | contains("osx")) | .sha256')
 
- # (-A) List all entries except for . and ..
- # (-S) Sort files by size
- # (-r) oldest entries first
- # (-t) most recently modified first
- # (tail -n 1) limit to top result
+# (-A) List all entries except for . and ..
+# (-S) Sort files by size
+# (-r) oldest entries first
+# (-t) most recently modified first
+# (tail -n 1) limit to top result
 
 select_iso_file () {
     ISO_FILE=$(ls -ASrt ./iso | tail -n 1)
